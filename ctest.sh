@@ -40,5 +40,5 @@ then
 fi
 
 timestamp=`date +%b%d_%I%M%P`
-ctest -VV -S /Users/rmudafor/Development/cdash/CTestSteer.cmake -DMODEL=$1 -DCOMPILERFLAG=$2 -DCOMPILERPATH=$3 -DBLASLIB="$4" #/home/rmudafor/Development/cdash/CTestSteer.cmake -DMODEL=$1 -DCOMPILERFLAG=$2 -DCOMPILERPATH=$3 -DBLASLIB="$4" > test_logs/$1_$2_$timestamp
+ctest -VV -S /home/rmudafor/Development/cdash/CTestSteer.cmake -DMODEL=$1 -DCOMPILERFLAG=$2 -DCOMPILERPATH=$3 -DBLASLIB="$4" > test_logs/$1_$2_$timestamp
 
