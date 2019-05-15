@@ -1,0 +1,8 @@
+# run intel regression test at midnight daily
+@daily /nopt/nrel/c7/bin/qsub /home/rmudafor/cdash/nightly_intel.sh
+#@daily /nopt/nrel/c7/bin/qsub /home/rmudafor/cdash/nightly_gnu.sh
+
+#24 * * * * /nopt/nrel/c7/bin/qsub /home/rmudafor/cdash/continuous_intel.sh
+#@hourly bash /home/rmudafor/cdash/writefile.sh hey
+
+
