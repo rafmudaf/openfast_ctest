@@ -34,7 +34,7 @@ set(CTEST_CONFIGURE_COMMAND " \
   -DBUILD_TESTING:BOOL=ON \
   -DCTEST_REGRESSION_TOL=0.00001"
 )
-set(CTEST_BUILD_COMMAND "${MAKE} beamdyn_driver")
+set(CTEST_BUILD_COMMAND "${MAKE} -j4 install")
 set(CTEST_COMMAND "${CTEST} -j4")
 
 ### Run CTest
@@ -60,15 +60,13 @@ message("ctest_build - return value of native command: ${res}")
 # Test
 message(" -- Test - ${CTEST_BUILD_NAME} --")
 ctest_test(
-  INCLUDE bd_
-  # INCLUDE_LABEL "openfast"
+#  INCLUDE bd_
+#  INCLUDE_LABEL "openfast"
   RETURN_VALUE res
 )
 message("ctest_test - 0 if all tests pass: ${res}")
 
 # Submit
 message(" -- Submit - ${CTEST_BUILD_NAME} --")
-# ctest_submit(RETRY_COUNT 20
-#              RETRY_DELAY 20
-#              RETURN_VALUE res)
+ctest_submit(RETRY_COUNT 20 RETRY_DELAY 20 RETURN_VALUE res)
 message(" -- Finished - ${CTEST_BUILD_NAME} --")
