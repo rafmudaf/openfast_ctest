@@ -1,8 +1,9 @@
-# run intel regression test at midnight daily
-@daily /nopt/nrel/c7/bin/qsub /home/rmudafor/cdash/nightly_intel.sh
-#@daily /nopt/nrel/c7/bin/qsub /home/rmudafor/cdash/nightly_gnu.sh
+# run regression test at midnight daily
+@daily sbatch /home/rmudafor/Development/cdash/ctest.sh nightly ifort
+@daily sbatch /home/rmudafor/Development/cdash/ctest.sh nightly gfortran
 
-#24 * * * * /nopt/nrel/c7/bin/qsub /home/rmudafor/cdash/continuous_intel.sh
-#@hourly bash /home/rmudafor/cdash/writefile.sh hey
+# 0 0 * * * /home/rmudafor/Development/cdash/cronjob/nightly_gnu.sh
+0 0 * * * /home/rmudafor/Development/cdash/cronjob/nightly_intel.sh
 
-
+# * * * * * bash /home/rmudafor/Development/cdash/cronjob/writefile.sh hey
+# @hourly bash /home/rmudafor/Development/cdash/cronjob/writefile.sh hey
