@@ -28,7 +28,7 @@ set(CTEST_UPDATE_COMMAND "${GIT}")
 set(CTEST_CONFIGURE_COMMAND " \
   ${CMAKE} \
   ${CTEST_SOURCE_DIRECTORY} \
-  -DCMAKE_Fortran_COMPILER:PATH=${COMPILERFLAG} \
+  -DCMAKE_Fortran_COMPILER:PATH=${COMPILER} \
   -DCMAKE_BUILD_TYPE=Release \
   -DCMAKE_INSTALL_PREFIX:PATH=${CTEST_SOURCE_DIRECTORY}/install \
   -DCTEST_BEAMDYN_EXECUTABLE:PATH=${CTEST_SOURCE_DIRECTORY}/install/bin/beamdyn_driver \
@@ -50,7 +50,7 @@ message("ctest_update - number of files updated: ${res}")
 
 # Configure
 message(" -- Configure - ${CTEST_BUILD_NAME} --")
-# file(REMOVE_RECURSE "${CTEST_BINARY_DIRECTORY}/reg_tests")  # The turbine model files seem to get corrupted, so copy again every time
+file(REMOVE_RECURSE "${CTEST_BINARY_DIRECTORY}/reg_tests")  # The turbine model files seem to get corrupted, so copy again every time
 ctest_configure(RETURN_VALUE res)
 message("ctest_configure - return value of native command: ${res}")
 
@@ -62,6 +62,7 @@ message("ctest_build - return value of native command: ${res}")
 # Test
 message(" -- Test - ${CTEST_BUILD_NAME} --")
 ctest_test(
+#  INCLUDE beamdyn_utest
 #  INCLUDE bd_
 #  INCLUDE_LABEL "openfast"
   RETURN_VALUE res
@@ -71,4 +72,5 @@ message("ctest_test - 0 if all tests pass: ${res}")
 # Submit
 message(" -- Submit - ${CTEST_BUILD_NAME} --")
 ctest_submit(RETRY_COUNT 20 RETRY_DELAY 20 RETURN_VALUE res)
+
 message(" -- Finished - ${CTEST_BUILD_NAME} --")
