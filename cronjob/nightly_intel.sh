@@ -9,7 +9,9 @@
 cd /home/rmudafor/Development/cdash
 
 # load the appropriate modules
-source intel_modules.sh
+module purge
+module load cmake/3.12.3
+module load comp-intel/2018.0.3
+module load mkl/2018.3.222
 
-#srun bash ctest.sh nightly ifort $FC "$blaslib"
-#bash ctest.sh nightly ifort $FC
+source ctest.sh nightly ifort
