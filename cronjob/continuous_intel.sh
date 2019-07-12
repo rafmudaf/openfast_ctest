@@ -1,18 +1,17 @@
 #!/bin/bash -l
-#PBS -A hfm
-#PBS -N openfast_regression_intel
-#PBS -q short
-#PBS -o $PBS_JOBNAME.log
-#PBS -j oe
-#PBS -l nodes=1:ppn=24
-#PBS -l walltime=4:00:00
-#PBS -l feature=haswell
+#SBATCH --ntasks=24
+#SBATCH --nodes=1
+#SBATCH --time=4:00:00
+#SBATCH --account=hfm
+#SBATCH --job-name=openfast-regression-intel
+#SBATCH --output=openfast_regression_intel_%j.log
 
-# this ensures your job runs from the directory from which you run the qsub command
-#cd $PBS_O_WORKDIR
-cd /home/rmudafor/cdash
+cd /home/rmudafor/Development/cdash
 
-intelmodules
+# load the appropriate modules
+module purge
+module load cmake/3.12.3
+module load comp-intel/2018.0.3
+module load mkl/2018.3.222
 
-blaslib="$BLASLIB"
-./ctest.sh continuous ifort $FC "$blaslib"
+source ctest.sh continuous intel $FC
